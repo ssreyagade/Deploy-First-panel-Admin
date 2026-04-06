@@ -1,0 +1,196 @@
+{
+  "employees": [
+    {
+      "name": "shreya",
+      "role": "dev",
+      "id": 2
+    },
+    {
+      "name": "rekha",
+      "role": "sales",
+      "id": 3
+    },
+    {
+      "name": "om",
+      "role": "software dev",
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Puma T-Shirt",
+      "category": "Men",
+      "price": 600,
+      "quantity": 10,
+      "main-image": "https://www.teez.in/cdn/shop/products/Link-Data-T-Shirt-1_large.jpg?v=1583558754",
+      "size": "M",
+      "colors": [
+        {
+          "name": "Blue",
+          "images": [
+            "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT8em2efpJbrUMJTBFJHwb7ns-X9QgyM8R2HsWTQXsYQwBVZSQNn-hTTxm8Nbo-rvA8k_ZvLskHQu9ZTs0qSHFye1pWoMlhRw"
+          ]
+        },
+        {
+          "name": "Red",
+          "images": [
+            "https://www.teez.in/cdn/shop/products/Link-Data-T-Shirt-1_large.jpg?v=1583558754"
+          ]
+        },
+        {
+          "name": "Black",
+          "images": ["https://m.media-amazon.com/images/I/31MCxAPUzxL.jpg"]
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "id": 2,
+      "name": "Blazer",
+      "category": "Men",
+      "price": 8000,
+      "quantity": 5,
+      "size": "L",
+      "main-image": "https://tse2.mm.bing.net/th/id/OIP.3iBeuG9UyxlRbNIDZ_cEjgHaIv?w=500&h=590&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "colors": [
+        {
+          "name": "Black",
+          "images": [
+            "https://tse2.mm.bing.net/th/id/OIP.3iBeuG9UyxlRbNIDZ_cEjgHaIv?w=500&h=590&rs=1&pid=ImgDetMain&o=7&rm=3"
+          ]
+        },
+        {
+          "name": "Gray",
+          "images": [
+            "https://tse3.mm.bing.net/th/id/OIP.ESsUw2eYyNGsm8PmfhcRDwHaJo?rs=1&pid=ImgDetMain&o=7&rm=3"
+          ]
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "id": 3,
+      "name": "Red Dress",
+      "category": "Women",
+      "price": 2500,
+      "quantity": 5,
+      "size": "S",
+      "main-image": "https://assets.myntassets.com/h_200,w_200,c_fill,g_auto/h_1440,q_100,w_1080/v1/assets/images/15816486/2021/11/18/92c35587-5cfb-4308-89d1-d523f216d1601637218079352-Fabindia-Women-Kurtas-4951637218078639-1.jpg",
+      "colors": [
+        {
+          "name": "Red",
+          "images": [
+            "https://assets.myntassets.com/h_200,w_200,c_fill,g_auto/h_1440,q_100,w_1080/v1/assets/images/15816486/2021/11/18/92c35587-5cfb-4308-89d1-d523f216d1601637218079352-Fabindia-Women-Kurtas-4951637218078639-1.jpg"
+          ]
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "id": 4,
+      "name": "Gown",
+      "category": "Women",
+      "price": 7000,
+      "quantity": 3,
+      "size": "M",
+      "main-image": "https://th.bing.com/th/id/R.a86cc172ab65d2554b9399074f546abe?rik=mX73bV6mCxBmwA&riu=http%3a%2f%2fd111vui60acwyt.cloudfront.net%2fproduct_photos%2f46247293%2fQQ_E5_9B_BE_E7_89_8720161129122903_original.jpg&ehk=CTgpKEQfXmTrb2oYS6fBzAs7yg90ElLQKLvVfCna%2f%2fY%3d&risl=&pid=ImgRaw&r=0",
+      "colors": [
+        {
+          "name": "Blue",
+          "images": [
+            "https://th.bing.com/th/id/R.a86cc172ab65d2554b9399074f546abe?rik=mX73bV6mCxBmwA&riu=http%3a%2f%2fd111vui60acwyt.cloudfront.net%2fproduct_photos%2f46247293%2fQQ_E5_9B_BE_E7_89_8720161129122903_original.jpg&ehk=CTgpKEQfXmTrb2oYS6fBzAs7yg90ElLQKLvVfCna%2f%2fY%3d&risl=&pid=ImgRaw&r=0"
+          ]
+        },
+        {
+          "name": "Green",
+          "images": [
+            "https://tse2.mm.bing.net/th/id/OIP.AxyY-DPlL_Y-DvvFcbvniwHaLH?rs=1&pid=ImgDetMain&o=7&rm=3"
+          ]
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "id": 5,
+      "name": "Kurti",
+      "category": "Women",
+      "price": 500,
+      "quantity": 8,
+      "size": "M",
+      "main-image": "https://assets.myntassets.com/h_200,w_200,c_fill,g_auto/h_1440,q_100,w_1080/v1/assets/images/23342382/2023/5/23/27cc39d0-86c5-4a9e-928e-264bb7e84c091684831497525KurtaSets1.jpg",
+      "colors": [
+        {
+          "name": "Pink",
+          "images": [
+            "https://media.landmarkshops.in/cdn-cgi/image/h=831,w=615,q=85,fit=cover/max-new/1000015612337-Pink-PEACH-1000015612337_01-2100.jpg"
+          ]
+        },
+        {
+          "name": "Yellow",
+          "images": [
+            "https://assets.myntassets.com/h_200,w_200,c_fill,g_auto/h_1440,q_100,w_1080/v1/assets/images/23342382/2023/5/23/27cc39d0-86c5-4a9e-928e-264bb7e84c091684831497525KurtaSets1.jpg"
+          ]
+        }
+      ],
+      "reviews": []
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "productId": 1,
+      "productName": "Puma T-Shirt",
+      "category": "Men",
+      "price": 600,
+      "quantity": 2,
+      "total": 40,
+      "confirmed": true,
+      "main-image": "https://www.teez.in/cdn/shop/products/Link-Data-T-Shirt-1_large.jpg?v=1583558754"
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "productName": "Blazer",
+      "category": "Men",
+      "price": 8000,
+      "quantity": 1,
+      "total": 80,
+      "confirmed": true,
+      "main-image": "https://tse2.mm.bing.net/th/id/OIP.3iBeuG9UyxlRbNIDZ_cEjgHaIv?w=500&h=590&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": 3,
+      "productId": 3,
+      "productName": "Red Dress",
+      "category": "Women",
+      "price": 2500,
+      "quantity": 3,
+      "total": 75,
+      "confirmed": true,
+      "main-image": "https://assets.myntassets.com/h_200,w_200,c_fill,g_auto/h_1440,q_100,w_1080/v1/assets/images/15816486/2021/11/18/92c35587-5cfb-4308-89d1-d523f216d1601637218079352-Fabindia-Women-Kurtas-4951637218078639-1.jpg"
+    },
+    {
+      "id": 4,
+      "productId": 4,
+      "productName": "Gown",
+      "category": "Women",
+      "price": 7000,
+      "quantity": 1,
+      "total": 70,
+      "confirmed": true,
+      "main-image": "https://th.bing.com/th/id/R.a86cc172ab65d2554b9399074f546abe?rik=mX73bV6mCxBmwA&riu=http%3a%2f%2fd111vui60acwyt.cloudfront.net%2fproduct_photos%2f46247293%2fQQ_E5_9B_BE_E7_89_8720161129122903_original.jpg&ehk=CTgpKEQfXmTrb2oYS6fBzAs7yg90ElLQKLvVfCna%2f%2fY%3d&risl=&pid=ImgRaw&r=0"
+    },
+    {
+      "id": 5,
+      "productId": 5,
+      "productName": "Kurti",
+      "category": "Women",
+      "price": 700,
+      "quantity": 2,
+      "total": 60,
+      "confirmed": false,
+      "main-image": "https://media.landmarkshops.in/cdn-cgi/image/h=831,w=615,q=85,fit=cover/max-new/1000015612337-Pink-PEACH-1000015612337_01-2100.jpg"
+    }
+  ]
+}

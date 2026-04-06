@@ -1,6 +1,6 @@
 import "../styles/style.css";
 
-function Navbar({ userName = "Admin", companyName = "MyCompany" }) {
+function Navbar({ userName = "Admin", companyName = "Fashion Hub Admin" }) {
   return (
     <nav className="navbar">
       {/* Company */}

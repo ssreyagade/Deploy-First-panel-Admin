@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { FaDollarSign, FaBoxes, FaRuler, FaPalette } from "react-icons/fa";
 import "../styles/style.css";
 
-const API_URL = "http://localhost:3000/products"; // ⚠️ change for deploy
+// ⚠️ For deployment, use static JSON in /public/data.json
+const API_URL = "/data.json";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -12,6 +13,7 @@ function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
 
+  // Resolve image URLs
   const getImageUrl = (img) => {
     if (!img) return "https://via.placeholder.com/400";
     if (img.startsWith("/images")) return `${window.location.origin}${img}`;
@@ -19,21 +21,30 @@ function ProductDetails() {
   };
 
   const fetchProduct = async () => {
-    const res = await fetch(`${API_URL}/${id}`);
-    const data = await res.json();
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
 
-    if (!data.colors || data.colors.length === 0) {
-      data.colors = [
-        {
-          name: data.color || "Default",
-          images: data["main-image"] ? [data["main-image"]] : [""],
-        },
-      ];
+      // For static JSON, data.products = [...]
+      const prod = data.products.find((p) => p.id === parseInt(id));
+      if (!prod) return;
+
+      // Ensure colors exist
+      if (!prod.colors || prod.colors.length === 0) {
+        prod.colors = [
+          {
+            name: prod.color || "Default",
+            images: prod["main-image"] ? [prod["main-image"]] : [""],
+          },
+        ];
+      }
+
+      setProduct(prod);
+      setSelectedColor(prod.colors[0]);
+      setCurrentImage(0);
+    } catch (err) {
+      console.error("Failed to fetch product:", err);
     }
-
-    setProduct(data);
-    setSelectedColor(data.colors[0]);
-    setCurrentImage(0);
   };
 
   useEffect(() => {
@@ -41,11 +52,13 @@ function ProductDetails() {
   }, [id]);
 
   const nextImage = () =>
-    setCurrentImage((prev) => (prev + 1) % selectedColor.images.length);
+    setCurrentImage(
+      (prev) => (prev + 1) % (selectedColor?.images?.length || 1),
+    );
 
   const prevImage = () =>
     setCurrentImage((prev) =>
-      prev === 0 ? selectedColor.images.length - 1 : prev - 1,
+      prev === 0 ? (selectedColor?.images?.length || 1) - 1 : prev - 1,
     );
 
   const handleAddReview = async () => {
@@ -56,13 +69,8 @@ function ProductDetails() {
       reviews: [...(product.reviews || []), reviewText],
     };
 
-    await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedProduct),
-    });
-
-    fetchProduct();
+    // For deploy, you can skip actual PUT request if using static JSON
+    setProduct(updatedProduct);
     setReviewText("");
   };
 
@@ -82,7 +90,7 @@ function ProductDetails() {
             <div className="main-image-box">
               <img
                 src={getImageUrl(selectedColor.images[currentImage])}
-                alt=""
+                alt={product.name}
               />
 
               {selectedColor.images.length > 1 && (

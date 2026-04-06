@@ -4,13 +4,16 @@ import "../styles/style.css";
 function OrdersTable() {
   const [orders, setOrders] = useState([]);
 
-  const API_ORDERS = "http://localhost:3000/orders"; // ⚠️ change for deploy
-
+  // Fetch from public/data.json
   const fetchConfirmedOrders = async () => {
-    const res = await fetch(API_ORDERS);
-    const data = await res.json();
-    const confirmedOrders = data.filter((o) => o.confirmed === true);
-    setOrders(confirmedOrders);
+    try {
+      const res = await fetch("/data.json"); // public/data.json
+      const data = await res.json();
+      const confirmedOrders = data.orders.filter((o) => o.confirmed === true);
+      setOrders(confirmedOrders);
+    } catch (err) {
+      console.error("Failed to fetch orders:", err);
+    }
   };
 
   useEffect(() => {

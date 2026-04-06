@@ -6,14 +6,16 @@ function OrderTable() {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
-  const API_ORDERS = "http://localhost:3000/orders"; // ⚠️ change for deploy
+  // ⚡ Static JSON for deploy
+  const API_ORDERS = "/data.json"; // Place your JSON file in /public folder
 
   const fetchConfirmedOrders = async () => {
     try {
       const res = await fetch(API_ORDERS);
       const data = await res.json();
 
-      const confirmedOrders = data.filter((o) => o.confirmed === true);
+      // Assuming your JSON structure: { orders: [ ... ] }
+      const confirmedOrders = data.orders.filter((o) => o.confirmed === true);
       setOrders(confirmedOrders);
     } catch (err) {
       console.error("Failed to fetch orders:", err);

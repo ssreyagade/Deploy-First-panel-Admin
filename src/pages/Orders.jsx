@@ -4,34 +4,34 @@ import "../styles/style.css";
 function Orders() {
   const [orders, setOrders] = useState([]);
 
-  const API_ORDERS = "http://localhost:3000/orders"; // ⚠️ change for deployment
+  // Fetch from static JSON in public folder
+  const API_ORDERS = "/data.json"; // ⚡ deploy-ready
 
   const fetchOrders = async () => {
-    const res = await fetch(API_ORDERS);
-    const data = await res.json();
+    try {
+      const res = await fetch(API_ORDERS);
+      const data = await res.json();
 
-    const updated = data.map((o) => ({
-      ...o,
-      confirmed: o.confirmed || false,
-    }));
+      // ensure confirmed field exists
+      const updated = data.orders.map((o) => ({
+        ...o,
+        confirmed: o.confirmed || false,
+      }));
 
-    setOrders(updated);
+      setOrders(updated);
+    } catch (err) {
+      console.error("Failed to fetch orders:", err);
+    }
   };
 
   useEffect(() => {
     fetchOrders();
   }, []);
 
-  const confirmOrder = async (order) => {
-    const updatedOrder = { ...order, confirmed: true };
-
-    await fetch(`${API_ORDERS}/${order.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedOrder),
-    });
-
-    fetchOrders();
+  const confirmOrder = (orderId) => {
+    setOrders((prev) =>
+      prev.map((o) => (o.id === orderId ? { ...o, confirmed: true } : o)),
+    );
     alert("Order Confirmed ✅");
   };
 
@@ -66,19 +66,17 @@ function Orders() {
                     />
                   )}
                 </td>
-
                 <td>{order.productName}</td>
                 <td>{order.category}</td>
                 <td>₹{order.price}</td>
                 <td>{order.quantity}</td>
                 <td className="bold">₹{order.price * order.quantity}</td>
-
                 <td>
                   {order.confirmed ? (
                     <span className="confirmed">Confirmed</span>
                   ) : (
                     <button
-                      onClick={() => confirmOrder(order)}
+                      onClick={() => confirmOrder(order.id)}
                       className="btn-confirm"
                     >
                       Confirm
@@ -119,7 +117,7 @@ function Orders() {
                 <span className="confirmed">Confirmed</span>
               ) : (
                 <button
-                  onClick={() => confirmOrder(order)}
+                  onClick={() => confirmOrder(order.id)}
                   className="btn-confirm full"
                 >
                   Confirm Order

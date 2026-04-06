@@ -1,61 +1,61 @@
 import { useEffect, useState } from "react";
 import "../styles/style.css";
 
-function Employees() {
+function EmployeeTable() {
   const [employees, setEmployees] = useState([]);
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [editId, setEditId] = useState(null);
 
-  const API = "http://localhost:3000/employees"; // ⚠️ change for deploy
-
+  // Fetch from static JSON in public folder
   const fetchEmployees = async () => {
-    const res = await fetch(API);
-    const data = await res.json();
-    setEmployees(data);
+    try {
+      const res = await fetch("/data.json"); // public/data.json
+      const data = await res.json();
+      setEmployees(data.employees || []);
+    } catch (err) {
+      console.error("Failed to fetch employees:", err);
+    }
   };
 
   useEffect(() => {
     fetchEmployees();
   }, []);
 
-  const addEmployee = async () => {
+  // Add new employee (in-memory only, no backend)
+  const addEmployee = () => {
     if (!name || !role) return;
 
-    await fetch(API, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, role }),
-    });
+    const newEmployee = {
+      id: employees.length ? employees[employees.length - 1].id + 1 : 1,
+      name,
+      role,
+    };
 
-    fetchEmployees();
+    setEmployees([...employees, newEmployee]);
     setName("");
     setRole("");
   };
 
-  const deleteEmployee = async (id) => {
-    await fetch(`${API}/${id}`, { method: "DELETE" });
-    fetchEmployees();
+  // Delete employee (in-memory only)
+  const deleteEmployee = (id) => {
+    const filtered = employees.filter((emp) => emp.id !== id);
+    setEmployees(filtered);
   };
 
+  // Start editing
   const editEmployee = (emp) => {
     setName(emp.name);
     setRole(emp.role);
     setEditId(emp.id);
   };
 
-  const updateEmployee = async () => {
-    await fetch(`${API}/${editId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, role }),
-    });
-
-    fetchEmployees();
+  // Update employee
+  const updateEmployee = () => {
+    const updated = employees.map((emp) =>
+      emp.id === editId ? { ...emp, name, role } : emp,
+    );
+    setEmployees(updated);
     setName("");
     setRole("");
     setEditId(null);
@@ -131,4 +131,4 @@ function Employees() {
   );
 }
 
-export default Employees;
+export default EmployeeTable;
