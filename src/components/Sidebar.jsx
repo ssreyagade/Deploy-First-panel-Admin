@@ -12,20 +12,20 @@ function Sidebar({ children }) {
     { name: "Inventory", path: "/inventory" },
     { name: "Orders", path: "/orders" },
     { name: "Invoice", path: "/invoice" },
-    { name: "Logout", path: "/logout" },
   ];
 
   return (
-    <div className="sidebar-container">
-      {/* MOBILE BUTTON */}
+    <div className="layout">
+      {/* MENU BUTTON */}
       <button className="menu-btn" onClick={() => setOpen(true)}>
-        Menu
+        ☰
       </button>
 
       {/* SIDEBAR */}
       <aside className={`sidebar ${open ? "open" : ""}`}>
         <h1 className="sidebar-title">Admin Panel</h1>
 
+        {/* ✅ ADD CLASS HERE */}
         <ul className="sidebar-links">
           {links.map((link) => (
             <li key={link.name}>
@@ -33,7 +33,9 @@ function Sidebar({ children }) {
                 to={link.path}
                 onClick={() => setOpen(false)}
                 className={
-                  location.pathname === link.path ? "active-link" : "link"
+                  location.pathname === link.path
+                    ? "active-link" // ✅ FIXED
+                    : "link" // ✅ FIXED
                 }
               >
                 {link.name}
@@ -41,15 +43,13 @@ function Sidebar({ children }) {
             </li>
           ))}
         </ul>
-
-        <div className="sidebar-footer">© 2026 Fashion Hub</div>
       </aside>
 
       {/* OVERLAY */}
       {open && <div className="overlay" onClick={() => setOpen(false)} />}
 
       {/* CONTENT */}
-      <div className="sidebar-content">{children}</div>
+      <div className="content">{children}</div>
     </div>
   );
 }

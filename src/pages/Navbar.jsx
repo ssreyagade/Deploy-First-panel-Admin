@@ -1,12 +1,20 @@
 import "../styles/style.css";
 
-function Navbar({ userName = "Admin" }) {
+function Navbar({ userName = "Admin", setOpen }) {
   const companyName = "FashionHub";
 
   return (
     <nav className="navbar">
-      {/* Left Spacer */}
-      <div className="nav-spacer"></div>
+      {/* ✅ MENU BUTTON (ADD HERE) */}
+      <button
+        className="menu-btn"
+        onClick={() => {
+          console.log("MENU CLICKED");
+          setOpen(true);
+        }}
+      >
+        ☰
+      </button>
 
       {/* Center Title */}
       <div className="nav-center">

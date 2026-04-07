@@ -180,26 +180,30 @@ function Inventory() {
           <tbody>
             {products.map((p) => (
               <tr key={p.id}>
-                <td>{p.category}</td>
-                <td>{p.name}</td>
-                <td>{p.size}</td>
-                <td>₹{p.price}</td>
-                <td>{p.quantity}</td>
-                <td>
+                <td data-label="Category">{p.category}</td>
+                <td data-label="Name">{p.name}</td>
+                <td data-label="Size">{p.size}</td>
+                <td data-label="Price">₹{p.price}</td>
+                <td data-label="Qty">{p.quantity}</td>
+
+                <td data-label="Image">
                   {p["main-image"] && (
                     <img src={p["main-image"]} className="table-img" />
                   )}
                 </td>
-                <td className="actions">
+
+                <td data-label="Actions" className="actions">
                   <button
                     className="btn-green"
                     onClick={() => navigate(`/product/${p.id}`)}
                   >
                     View
                   </button>
+
                   <button className="btn-yellow" onClick={() => handleEdit(p)}>
                     Edit
                   </button>
+
                   <button
                     className="btn-red"
                     onClick={() => handleDelete(p.id)}

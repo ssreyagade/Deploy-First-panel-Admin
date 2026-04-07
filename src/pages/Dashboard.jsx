@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
+
 import {
   BarChart,
   Bar,
@@ -31,37 +32,33 @@ function Dashboard() {
   const [pieData, setPieData] = useState([]);
   const [areaData, setAreaData] = useState([]);
 
-  const API_EMPLOYEES = "http://localhost:3000/employees";
-  const API_PRODUCTS = "http://localhost:3000/products";
-  const API_ORDERS = "http://localhost:3000/orders";
+  const COLORS = ["#6366f1", "#22c55e", "#f59e0b", "#ef4444"];
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const [empRes, prodRes, ordRes] = await Promise.all([
-          fetch(API_EMPLOYEES),
-          fetch(API_PRODUCTS),
-          fetch(API_ORDERS),
-        ]);
+        // ✅ Fetch single JSON file
+        const res = await fetch("/data.json");
+        const data = await res.json();
 
-        const [empData, prodData, ordData] = await Promise.all([
-          empRes.json(),
-          prodRes.json(),
-          ordRes.json(),
-        ]);
+        const empList = data.employees || [];
+        const prodList = data.products || [];
+        const ordList = data.orders || [];
 
-        setEmployeesCount(empData.length);
-        setProductsCount(prodData.length);
-        setOrdersCount(ordData.length);
+        // ✅ CARD COUNTS
+        setEmployeesCount(empList.length);
+        setProductsCount(prodList.length);
+        setOrdersCount(ordList.length);
 
-        const prices = prodData.map((p) => Number(p.price) || 0);
+        // ✅ PRODUCT PRICES
+        const prices = prodList.map((p) => Number(p.price) || 0);
 
         const total = prices.reduce((a, b) => a + b, 0);
         const avg = Math.round(total / (prices.length || 1));
-        const min = Math.min(...prices);
-        const max = Math.max(...prices);
+        const min = prices.length ? Math.min(...prices) : 0;
+        const max = prices.length ? Math.max(...prices) : 0;
 
-        // BAR
+        // ✅ BAR CHART
         setBarData([
           { name: "Min", value: min },
           { name: "Avg", value: avg },
@@ -69,7 +66,7 @@ function Dashboard() {
           { name: "Total", value: total },
         ]);
 
-        // LINE
+        // ✅ LINE CHART
         setLineData(
           prices.map((p, i) => ({
             name: `P${i + 1}`,
@@ -77,9 +74,9 @@ function Dashboard() {
           })),
         );
 
-        // PIE
+        // ✅ PIE CHART
         const categoryMap = {};
-        prodData.forEach((p) => {
+        prodList.forEach((p) => {
           categoryMap[p.category] = (categoryMap[p.category] || 0) + 1;
         });
 
@@ -90,7 +87,7 @@ function Dashboard() {
           })),
         );
 
-        // AREA
+        // ✅ AREA CHART
         let cumulative = 0;
         const area = prices.map((p, i) => {
           cumulative += p;
@@ -99,50 +96,50 @@ function Dashboard() {
             total: cumulative,
           };
         });
+
         setAreaData(area);
       } catch (err) {
-        console.error(err);
+        console.error("Error loading data:", err);
       }
     };
 
-    fetchData();
+    loadData();
   }, []);
 
   const cards = [
     {
       title: "Employees",
       count: employeesCount,
-      bg: "from-pink-400 via-pink-500 to-pink-600",
+      color: "#ec4899",
       onClick: () => navigate("/employees"),
     },
     {
       title: "Products",
       count: productsCount,
-      bg: "from-green-400 via-green-500 to-green-600",
+      color: "#22c55e",
       onClick: () => navigate("/inventory"),
     },
     {
       title: "Orders",
       count: ordersCount,
-      bg: "from-blue-400 via-blue-500 to-blue-600",
+      color: "#3b82f6",
       onClick: () => navigate("/ordertable"),
     },
   ];
-
-  const COLORS = ["#6366f1", "#22c55e", "#f59e0b", "#ef4444"];
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-box">
         <h1 className="dashboard-title">Dashboard Analytics</h1>
 
-        {/* CARDS */}
+        {/* ✅ CARDS */}
         <div className="card-grid">
           {cards.map((card) => (
             <div
               key={card.title}
               onClick={card.onClick}
-              className={`card ${card.title.toLowerCase()}`}
+              className="card"
+              style={{ backgroundColor: card.color }}
             >
               <h2>{card.title}</h2>
               <p>{card.count}</p>
@@ -150,8 +147,9 @@ function Dashboard() {
           ))}
         </div>
 
-        {/* CHARTS */}
+        {/* ✅ CHARTS */}
         <div className="chart-grid">
+          {/* BAR */}
           <div className="chart-box">
             <h3>Sales Comparison</h3>
             <ResponsiveContainer width="100%" height={250}>
@@ -165,6 +163,7 @@ function Dashboard() {
             </ResponsiveContainer>
           </div>
 
+          {/* LINE */}
           <div className="chart-box">
             <h3>Price Trend</h3>
             <ResponsiveContainer width="100%" height={250}>
@@ -178,6 +177,7 @@ function Dashboard() {
             </ResponsiveContainer>
           </div>
 
+          {/* PIE */}
           <div className="chart-box">
             <h3>Category Distribution</h3>
             <ResponsiveContainer width="100%" height={250}>
@@ -193,6 +193,7 @@ function Dashboard() {
             </ResponsiveContainer>
           </div>
 
+          {/* AREA */}
           <div className="chart-box">
             <h3>Cumulative Sales</h3>
             <ResponsiveContainer width="100%" height={250}>
