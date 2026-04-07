@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { FaDollarSign, FaBoxes, FaRuler, FaPalette } from "react-icons/fa";
 import "../styles/style.css";
 
-// ⚠️ For deployment, use static JSON in /public/data.json
 const API_URL = "/data.json";
 
 function ProductDetails() {

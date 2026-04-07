@@ -1974,3 +1974,22 @@ tr:hover {
     text-align: center;
   }
 }
+.actions {
+  display: flex;
+  flex-wrap: wrap; /* ✅ allows wrapping */
+  gap: 5px;
+}
+
+.actions button {
+  flex: 1 1 auto; /* ✅ buttons adjust */
+  min-width: 60px; /* optional */
+  text-align: center;
+}
+.inventory-table-box table {
+  width: 100%;
+  table-layout: auto; /* ✅ change from fixed → auto */
+}
+.inventory-table-box td {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}

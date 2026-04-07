@@ -4,8 +4,7 @@ import "../styles/style.css";
 function Orders() {
   const [orders, setOrders] = useState([]);
 
-  // Fetch from static JSON in public folder
-  const API_ORDERS = "/data.json"; // ⚡ deploy-ready
+  const API_ORDERS = "/data.json";
 
   const fetchOrders = async () => {
     try {

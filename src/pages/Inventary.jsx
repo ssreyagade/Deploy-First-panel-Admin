@@ -5,8 +5,7 @@ import "../styles/style.css";
 function Inventory() {
   const navigate = useNavigate();
 
-  // ⚠️ IMPORTANT: Replace this later for deployment
-  const API_URL = "http://localhost:3000/products";
+  const API_URL = "/data.json";
 
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -27,7 +26,8 @@ function Inventory() {
   const fetchProducts = async () => {
     const res = await fetch(API_URL);
     const data = await res.json();
-    setProducts(data);
+
+    setProducts(data.products);
   };
 
   const handleImageUpload = (e) => {
